@@ -8,6 +8,8 @@ for dir in home scratch software; do
   sudo chmod 755 /$dir
 done
 
+mkdir /scratch/flag
+
 while IFS= read -r line; do
   USER_GROUP=`id -gn ${i}`
   sudo usermod -m -d /home/$i $i
