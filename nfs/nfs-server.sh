@@ -12,7 +12,7 @@ mkdir /scratch/flag
 
 while IFS= read -r line; do
   USER_GROUP=`id -gn ${i}`
-  sudo usermod -m -d /home/$i $i
+  sudo usermod -d /home/$i $i
   sudo chown $i:$USER_GROUP /home/$i
 done < <( ls -l /users | grep rwx | cut -d' ' -f3 )
 
