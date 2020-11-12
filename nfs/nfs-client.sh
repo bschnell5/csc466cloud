@@ -2,7 +2,7 @@
 
 sudo yum install -y nfs-utils
 
-for dir in home scratch software; do
+for dir in scratch software home; do
   mkdir -p /$dir
   while [ ! -d /scratch/flag ]; do
     sudo mount -t nfs 192.168.1.1:/$dir /$dir || true
@@ -10,7 +10,7 @@ for dir in home scratch software; do
   done
 done
 
-for dir in home scratch software; do
+for dir in scratch software home; do
   echo '192.168.1.1:$dir /$dir nfs defaults 0 0' | sudo tee -a /etc/fstab
 done
 
