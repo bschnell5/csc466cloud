@@ -4,7 +4,7 @@ sudo yum install -y nfs-utils
 
 for dir in home scratch software; do
   mkdir -p /$dir
-  while [ ! -d /scratch/dir ]; do
+  while [ ! -d /scratch/flag ]; do
     sudo mount -t nfs 192.168.1.1:/$dir /$dir || true
     sleep 60
   done
