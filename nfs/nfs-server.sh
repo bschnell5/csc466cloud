@@ -1,9 +1,20 @@
+#!/bin/bash
+
 sudo yum install -y nfs-utils
-sudo mkdir -p /scratch
-sudo mkdir -p /software
-sudo chown nobody:nobody /scratch
-sudo chown nobody:nobody /software
-sudo chmod 777 /scratch
+
+for dir in home scratch software; do
+  mkdir -p /$dir
+  chown nobody:nobody /$dir
+  sudo chmod 755 /$dir
+done
+
+while IFS= read -r line; do
+  USER_GROUP=`id -gn ${i}`
+  sudo usermod -m -d /home/$i $i
+  sudo chown $i:$USER_GROUP /home/$i
+done < <( ls -l /users | grep rwx | cut -d' ' -f3 )
+
+
 sudo systemctl enable rpcbind
 sudo systemctl enable nfs-server
 sudo systemctl enable nfs-lock
