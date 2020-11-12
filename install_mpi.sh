@@ -8,8 +8,18 @@ sudo ./configure --prefix=/software/openmpi/3.1.2 --enable-orterun-prefix-by-def
 sudo make
 sudo make all install
 
-echo "export PATH=$PATH:/opt/openmpi/3.1.2/bin" | sudo tee -a /etc/profile 
-echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/openmpi/3.1.2/lib/" | sudo tee -a /etc/profile 
-cd ..
+while IFS= read -r line; do
+  sudo mkdir /home/$i || true
+    sudo chown $i /home/$i
+    sudo touch /home/$i/.bashrc
+    echo 'export PATH=$PATH:/software/openmpi/3.1.2/bin' | sudo tee -a /home/$i/.bashrc
+    echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/software/openmpi/3.1.2/lib/' | sudo tee -a /home/$i/.bashrc
+    sudo mkdir /users/$i || true
+    sudo chown $i /users/$i
+    sudo touch /users/$i/.bashrc
+    echo 'export PATH=$PATH:/software/openmpi/3.1.2/bin' | sudo tee -a /users/$i/.bashrc
+    echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/software/openmpi/3.1.2/lib/' | sudo tee -a /users/$i/.bashrc
+done < <( ls -l /users | grep rwx | cut -d' ' -f3 )
+
 sudo rm -Rf openmpi-3.1.2
 sudo rm -Rf openmpi-3.1.2.tar.gz 
