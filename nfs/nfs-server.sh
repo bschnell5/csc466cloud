@@ -3,13 +3,10 @@
 sudo yum install -y nfs-utils
 
 for dir in scratch software home; do
-  mkdir -p /$dir
+  mkdir -p /$dir/flag
   chown nobody:nobody /$dir
   sudo chmod 755 /$dir
 done
-
-mkdir /scratch/flag
-
 
 
 sudo systemctl enable rpcbind
