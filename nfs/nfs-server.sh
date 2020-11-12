@@ -10,11 +10,12 @@ done
 
 mkdir /scratch/flag
 
-while IFS= read -r line; do
+for i in $(ls -l /users | grep rwx | cut -d' ' -f3); do
   USER_GROUP=`id -gn ${i}`
+  mkdir -p /home/$i
   sudo usermod -d /home/$i $i
   sudo chown $i:$USER_GROUP /home/$i
-done < <( ls -l /users | grep rwx | cut -d' ' -f3 )
+done
 
 
 sudo systemctl enable rpcbind
