@@ -38,8 +38,11 @@ for i in range(3):
   iface.addAddress(pg.IPv4Address(prefixForIP + str(i + 1), "255.255.255.0"))
   link.addInterface(iface)
 
-  node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/install_mpi.sh"))
-  node.addService(pg.Execute(shell="sh", command="sudo /local/repository/install_mpi.sh"))
-  
+  if i == 0:
+    node.addService(pg.Execute(shell="sh", command="sudo bash /local/repository/nfs/nfs-server.sh"))
+    node.addService(pg.Execute(shell="sh", command="sudo bash /local/repository/install_mpi.sh"))
+  else: 
+    node.addService(pg.Execute(shell="sh", command="sudo bash /local/repository/nfs/nfs-client.sh"))
+
 # Print the RSpec to the enclosing page.
 pc.printRequestRSpec(request)
