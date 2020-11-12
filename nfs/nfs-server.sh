@@ -13,8 +13,9 @@ mkdir /scratch/flag
 for i in $(ls -l /users | grep rwx | cut -d' ' -f3); do
   USER_GROUP=`id -gn ${i}`
   sudo  mkdir -p /home/$i
+  sudo cp /etc/skel/.bashrc /home/$i/.bashrc
   sudo usermod -d /home/$i $i
-  sudo chown $i:$USER_GROUP /home/$i
+  sudo chown -R $i:$USER_GROUP /home/$i
 done
 
 
