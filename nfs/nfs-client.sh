@@ -9,8 +9,3 @@ for dir in scratch software home; do
     sleep 60
   done
 done
-
-for dir in scratch software home; do
-  echo '192.168.1.1:$dir /$dir nfs defaults 0 0' | sudo tee -a /etc/fstab
-done
-
