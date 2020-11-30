@@ -9,8 +9,8 @@ sudo make
 sudo make all install
 
 while IFS= read -r line; do
-  echo 'export PATH=$PATH:/software/openmpi/3.1.2/bin' | sudo tee -a /users/bschnell5/.bashrc
-  echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/software/openmpi/3.1.2/lib/' | sudo tee -a /users/bschnell5/.bashrc
+  echo 'export PATH=$PATH:/software/openmpi/3.1.2/bin' | sudo tee -a /users/bs851661/.bashrc
+  echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/software/openmpi/3.1.2/lib/' | sudo tee -a /users/bs851661/.bashrc
 done < <( ls -l /users | grep rwx | cut -d' ' -f3 )
 
 sudo rm -Rf openmpi-3.1.2
